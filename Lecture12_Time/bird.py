@@ -6,6 +6,8 @@ TIME_PER_ACTION = 1.0
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 14
 
+RUN_SPEED_PPS = 300.0
+
 class Bird:
     def __init__(self):
         self.image = load_image('bird_animation.png')
@@ -18,6 +20,12 @@ class Bird:
 
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 14
+        self.x += self.dir * RUN_SPEED_PPS * game_framework.frame_time
+        if self.x < 50:
+            self.dir = 1
+        elif self.x > 1550:
+            self.dir = -1
+
         pass
 
     def draw(self):
