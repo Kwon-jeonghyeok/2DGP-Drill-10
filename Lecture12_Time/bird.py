@@ -1,5 +1,10 @@
 from pico2d import load_image
 import random
+import game_framework
+
+TIME_PER_ACTION = 1.0
+ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
+FRAMES_PER_ACTION = 14
 
 class Bird:
     def __init__(self):
@@ -12,8 +17,11 @@ class Bird:
 
 
     def update(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 14
         pass
 
     def draw(self):
-        self.image.clip_draw(0, 182, 182, 166, self.x, self.y, 91, 83)
+        bottom = (2 - ( int(self.frame) // 5)) * 166
+        left = (int(self.frame) % 5) * 182
+        self.image.clip_draw(left, bottom, 182, 166, self.x, self.y, 91, 83)
         pass
