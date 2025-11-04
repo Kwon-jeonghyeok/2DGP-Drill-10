@@ -31,5 +31,8 @@ class Bird:
     def draw(self):
         bottom = (2 - ( int(self.frame) // 5)) * 166
         left = (int(self.frame) % 5) * 182
-        self.image.clip_draw(left, bottom, 182, 166, self.x, self.y, 91, 83)
+        if self.dir == 1:
+            self.image.clip_draw(left,  bottom, 182, 166, self.x, self.y,91,83)
+        else:
+            self.image.clip_composite_draw(left ,  bottom, 182, 166,0,'h', self.x, self.y,91,83)
         pass
